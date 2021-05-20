@@ -17,13 +17,14 @@ TEST_EVERY_BATCH = 1000
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cuda", default=False, action="store_true", help="Enable cuda")
+    parser.add_argument("--cuda", default=True, action="store_true", help="Enable cuda")
     parser.add_argument("-n", "--name", required=True, help="Name of the run")
     parser.add_argument("--seed", type=int, default=common.DEFAULT_SEED, help="Random seed to use, default=%d" % common.DEFAULT_SEED)
     parser.add_argument("--steps", type=int, default=None, help="Limit of training steps, default=disabled")
     args = parser.parse_args()
     device = torch.device("cuda" if args.cuda else "cpu")
-
+    print('device: ', device, )
+    
     saves_path = os.path.join("saves", "01_a2c_" + args.name)
     os.makedirs(saves_path, exist_ok=True)
 

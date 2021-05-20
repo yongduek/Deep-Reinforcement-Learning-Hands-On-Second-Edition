@@ -73,10 +73,11 @@ if __name__ == "__main__":
     torch.manual_seed(common.SEED)
     params = common.HYPERPARAMS['pong']
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cuda", default=False,
+    parser.add_argument("--cuda", default=True,
                         action="store_true", help="Enable cuda")
     args = parser.parse_args()
     device = torch.device("cuda" if args.cuda else "cpu")
+    print('device:', device, params.env_name)
 
     env = gym.make(params.env_name)
     env = ptan.common.wrappers.wrap_dqn(env)
